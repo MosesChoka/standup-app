@@ -1,9 +1,10 @@
 class AccountsController < ApplicationController
-    def new
-        redirect_to_root_path unless current_user.account.nil?
+  
 
-        @account = Account.new
-    end
+  def new
+    redirect_to root_path unless current_user.account.nil?
+    @account = Account.new
+  end
 
     def create
         @account = Account.new(account_params)

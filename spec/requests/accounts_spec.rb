@@ -1,31 +1,49 @@
 require 'rails_helper'
 
 RSpec.describe "Accounts", type: :request do
-
+  login_user
+  
   describe "GET #new" do
-    it "returns http success" do
-      get '/accounts/new'
-      expect(response).to have_http_status(:success)
+    context "when user has no account" do
+      before do
+        allow_any_instance_of(User).to receive(:account).and_return(nil)
+      end
+      it "returns http success" do
+        get '/accounts/new'
+        expect(response).to have_http_status(:success)
+      end
+    
+      it "renders new template" do
+        get '/accounts/new'
+        expect(response).to render_template :new
+      end
     end
 
-    it "renders new template" do
-      get '/accounts/new'
-      expect(response).to render_template :new
+    context "when user has an account" do
+      before do
+        allow_any_instance_of(User).to receive(:account).and_return(FactoryBot.create(:account))
+      end
+
+      it "redirects to root path" do
+        get '/accounts/new'
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 
   describe "POST #create" do
+
     it "creates an account" do
-      post '/accounts', params: {account: FactoryBot.attributes_for(:account)}
-      expect(reponse).to redirect_to root_path
+      post '/accounts', params: { account: FactoryBot.attributes_for(:account)}
+      expect(response).to redirect_to root_path
     end
 
     it "renders :new on failure" do
-      post '/accounts', params: {account: FactoryBot.attributes_for(:account, {
-        name: nil
-      })}
+      post '/accounts', params: {account: FactoryBot.attributes_for(:account,{
+      name: nil})}
       expect(response).to render_template :new
     end
   end
+
 end
 
