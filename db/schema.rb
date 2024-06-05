@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_125847) do
-=======
-ActiveRecord::Schema[7.1].define(version: 2024_06_04_110849) do
->>>>>>> users
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_113418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -33,8 +29,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_110849) do
     t.index ["settings"], name: "index_accounts_on_settings", using: :gin
   end
 
-<<<<<<< HEAD
-=======
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -45,7 +39,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_110849) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
->>>>>>> users
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -57,8 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_110849) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.uuid "account_id"
-<<<<<<< HEAD
-=======
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -67,7 +58,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_110849) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
->>>>>>> users
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -76,8 +66,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_110849) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-<<<<<<< HEAD
-=======
   create_table "users_roles", id: false, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "role_id"
@@ -86,6 +74,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_110849) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
->>>>>>> users
   add_foreign_key "users", "accounts"
 end
