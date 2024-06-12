@@ -1,6 +1,7 @@
 class User < ApplicationRecord 
+  rolify
   :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
   belongs_to :account, optional: true
