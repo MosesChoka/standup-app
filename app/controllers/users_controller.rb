@@ -87,7 +87,7 @@ class UsersController < ApplicationController
         }
       else
         set_choices
-        format.html ( render :edit }
+        format.html { render :edit }
       end
     end
   end
@@ -120,7 +120,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :timezone)
+    params.require(:user).permit(:name, :email, :role, :timezone)
   end
 
   def user_password_params
