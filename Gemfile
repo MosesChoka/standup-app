@@ -67,6 +67,7 @@ group :development, :test do
   gem 'simplecov', :require => false, :group => :test
   gem "factory_bot_rails"
   gem 'faker'
+  gem 'webdrivers', '~>5.0', require: false
 end
 
 group :development do

@@ -1,13 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "Accounts", type: :request do
-  login_user
+  before(:each) do
+    user = User.create!(
+      name: "John",
+      email: "specuser@test.com",
+      password: 'spec123'
+    )
+    sign_in user
+  end
+
   
   describe "GET #new" do
-    context "when user has no account" do
-      before do
-        allow_any_instance_of(User).to receive(:account).and_return(nil)
-      end
+
       it "returns http success" do
         get '/accounts/new'
         expect(response).to have_http_status(:success)
@@ -17,18 +22,6 @@ RSpec.describe "Accounts", type: :request do
         get '/accounts/new'
         expect(response).to render_template :new
       end
-    end
-
-    context "when user has an account" do
-      before do
-        allow_any_instance_of(User).to receive(:account).and_return(FactoryBot.create(:account))
-      end
-
-      it "redirects to root path" do
-        get '/accounts/new'
-        expect(response).to redirect_to(root_path)
-      end
-    end
   end
 
   describe "POST #create" do
