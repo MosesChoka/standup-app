@@ -1,16 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "Accounts", type: :request do
+  #login_user
   before(:each) do
     user = User.create!(
       name: "John",
       email: "specuser@test.com",
-      password: 'spec123'
+      password: "spec123"
     )
+
     sign_in user
   end
 
-  
+  # spec for the new action
   describe "GET #new" do
 
       it "returns http success" do
@@ -24,6 +26,7 @@ RSpec.describe "Accounts", type: :request do
       end
   end
 
+  # spec for the create action
   describe "POST #create" do
 
     it "creates an account" do

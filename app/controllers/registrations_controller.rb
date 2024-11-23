@@ -1,4 +1,4 @@
-class RegistrationsController < Devise::RegistrationsController
+class RegistrationsController < Devise::RegistrationsController # inherits from Devise::RegistrationsController
   before_action :configure_permitted_parameters
 
   protected

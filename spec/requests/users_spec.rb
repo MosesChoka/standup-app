@@ -77,6 +77,7 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "POST #create" do
+    user = FactoryBot.create(:user)
     it "creates an user" do
       post '/account/users', params: {
         user: FactoryBot.attributes_for(:user, {role: 'user'})
@@ -121,7 +122,7 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "DELETE #destroy" do
-    user = FactoryBot.create(:user) 
+    user = FactoryBot.create(:user)
     it "returns http success" do
       delete "/account/users/#{user.id}", params: {
         id: user.id

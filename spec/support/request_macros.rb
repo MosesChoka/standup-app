@@ -1,3 +1,4 @@
+# this file set a spec mapping for Devise, create a User record and log in the user that was just created
 module RequestMacros
   def login_user
     before(:each) do
