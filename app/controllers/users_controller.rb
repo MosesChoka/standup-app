@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_users, only: [:index]
 
 
   def index
+    
+  end
 
+  def show
+  
   end
 
   def new
@@ -106,8 +110,9 @@ class UsersController < ApplicationController
 
   private
 
+  # Use callbacks to share common setup or constraints between actions
   def set_users
-    @users = current_account.users
+    @users = current_account.users 
   end
 
 
