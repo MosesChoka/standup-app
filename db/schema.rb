@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_11_053057) do
     t.index ["settings"], name: "index_accounts_on_settings", using: :gin
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
     t.bigint "resource_id"

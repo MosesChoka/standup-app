@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     @user = current_user
     respond_to do |format|
       if @user.update(user_password_params)
-        bypass_sign_in(@user)
+        bypass_sign_in(@user) # session is invalidated when updating password i.e., Devise logs you out
         format.html {
           redirect_to my_password_path,
           notice: 'Password was successfully updated.'
