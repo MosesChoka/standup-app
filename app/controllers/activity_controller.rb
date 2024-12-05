@@ -1,4 +1,6 @@
 class ActivityController < ApplicationController
+   # adds CanCanCan command
+
   def mine
   end
 

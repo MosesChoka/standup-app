@@ -1,6 +1,8 @@
 class User < ApplicationRecord 
   rolify
-  
+  attr_accessor :role
+  include CanCan::Ability
+
   :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable

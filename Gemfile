@@ -87,3 +87,5 @@ end
 
 gem 'rack-cors', :require => 'rack/cors'
 
+
+gem "ostruct", "~> 0.6.1"

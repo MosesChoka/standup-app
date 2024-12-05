@@ -13,5 +13,6 @@ module SystemMacros
       @admin.add_role :admin, @admin.account
       login_as(@admin, :scope => :user)
     end
+    
   end
 end
