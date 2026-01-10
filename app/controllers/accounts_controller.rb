@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-    load_and_authorize_resource # adds CanCanCan command
+    #load_and_authorize_resource adds CanCanCan command to this controller
     # the new action  will render the form to capture the new accounts name
     def new
         redirect_to root_path unless current_user.account.nil? # redirect to root_path if there's already an account

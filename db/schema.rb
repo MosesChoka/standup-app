@@ -75,4 +75,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_11_053057) do
   end
 
   add_foreign_key "users", "accounts"
+  
 end

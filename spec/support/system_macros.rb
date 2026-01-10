@@ -11,7 +11,7 @@ module SystemMacros
     before(:each) do
       @admin = FactoryBot.create(:user)
       @admin.add_role :admin, @admin.account
-      login_as(@admin, :scope => :user)
+      login_as(@admin, scope: :user)
     end
     
   end

@@ -4,6 +4,8 @@ RSpec.describe "Users",  type: :request do
   login_user
 
   describe "GET /index" do
+    login_admin
+
     it "returns http success" do
       get "/account/users"
       expect(response).to have_http_status(:success)
@@ -65,6 +67,8 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "GET /new" do
+    login_admin
+
     it "returns http success" do
       get '/account/users/new'
       expect(response).to have_http_status(:success)
@@ -74,10 +78,26 @@ RSpec.describe "Users",  type: :request do
       get '/account/users/new'
       expect(response).to render_template :new
     end
+
+    it "fails on unauthenticated user" do
+      user = User.create!(
+        name: "John",
+        email: "specuseruser@test.com",
+        password: 'spec123'
+      )
+
+      user.add_role :user
+      sign_in user
+      get "/account/users/new"
+      expect(response).to have_http_status(:redirect)
+    end
   end
 
   describe "POST #create" do
-    user = FactoryBot.create(:user)
+    login_admin
+
+    #user = FactoryBot.create(:user)
+
     it "creates an user" do
       post '/account/users', params: {
         user: FactoryBot.attributes_for(:user, {role: 'user'})
@@ -105,8 +125,27 @@ RSpec.describe "Users",  type: :request do
     end
   end
 
-  describe "PUT #update" do
+  describe "GET /edit" do
+    login_admin
+
     user = FactoryBot.create(:user)
+
+    it "returns http success" do
+      get "/account/users/#{user.id}/edit"
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders edit template" do
+      get "/account/users/#{user.id}/edit"
+      expect(response).to render_template :edit
+    end
+  end
+
+  describe "PUT #update" do
+    login_admin
+
+    user = FactoryBot.create(:user)
+
     it "returns http success" do
       put "/account/users/#{user.id}", params: {id: user.id, user: {name: "Yay"}}
       expect(response).to redirect_to account_users_path
@@ -122,6 +161,8 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "DELETE #destroy" do
+    login_admin
+    
     user = FactoryBot.create(:user)
     it "returns http success" do
       delete "/account/users/#{user.id}", params: {

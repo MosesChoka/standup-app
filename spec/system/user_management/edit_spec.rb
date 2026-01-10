@@ -1,20 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe 'Edit User', type: :system do
-  login_user
+  login_admin
 
   it 'should be able to visit the user index and see at least one user' do
     visit account_users_path
 
     expect(current_path).to eql(account_users_path)
-    expect(page).to have_content("#{@user.email}")
+    expect(page).to have_content("#{@admin.email}")
   end
 
   context "click and edit user" do
     it "should click edit and go to edit page" do
       visit account_users_path
       first('tbody tr').click_on("Edit")
-      expect(current_path).to eql(edit_account_user_path(@user))
+      expect(current_path).to eql(edit_account_user_path(@admin))
     end
 
     context "and on the edit page" do
@@ -39,7 +39,7 @@ RSpec.describe 'Edit User', type: :system do
         end
 
         click_button("Edit User")
-        expect(current_path).to eql(account_user_path(@user))
+        expect(current_path).to eql(account_user_path(@admin))
       end
     end
   end

@@ -1,5 +1,5 @@
 class ActivityController < ApplicationController
-   # adds CanCanCan command
+  #authorize_resource  class: :"ActivityController" # adds CanCanCan command
 
   def mine
   end
