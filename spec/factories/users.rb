@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    account # user and account association
+    account { nil } # user and account association
     name {"MyString"}
     email { Faker::Internet.email }
     password {"123ewq"}

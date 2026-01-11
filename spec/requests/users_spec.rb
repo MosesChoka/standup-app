@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Users",  type: :request do
-  login_user
-
+  
   describe "GET /index" do
-    login_admin
+    login_user
 
     it "returns http success" do
       get "/account/users"
@@ -24,6 +23,7 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "GET /me" do 
+    login_user
     it "returns http success" do
       get "/user/me"
       expect(response).to have_http_status(:success)
@@ -31,6 +31,7 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "PATCH #update_me" do
+    login_user
     user = FactoryBot.create(:user)
     it "return http success" do
       patch "/user/update_me", params: {id: user.id, user: {name: 'John'}}
@@ -47,6 +48,8 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "GET #password" do
+    login_user
+
     it "returns http success" do
       get '/user/password'
       expect(response).to have_http_status(:success)
@@ -54,6 +57,8 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "PATCH #update_password" do
+    login_user
+
     user = FactoryBot.create(:user)
     it "returns http success" do
       patch '/user/update_password', params: {id: user.id, user: {password: 'd2g4j6mlp', password_confirmation: 'd2g4j6mlp'}}
@@ -67,7 +72,7 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "GET /new" do
-    login_admin
+    login_user
 
     it "returns http success" do
       get '/account/users/new'

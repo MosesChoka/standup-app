@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :account do
-    name { "MyString" }
-    addr1 { "MyString" }
-    addr2 { "MyString" }
-    city { "MyString" }
-    state { "MyString" }
-    zip { "MyString" }
-    country { "MyString" }
+    sequence(:name) { |n| "MyString#{n}" }
+    sequence(:addr1) { |n| "MyString#{n}" }
+    sequence(:addr2) { |n| "MyString#{n}" }
+    sequence(:city) { |n| "MyString#{n}" }
+    sequence(:state) { |n| "MyString#{n}" }
+    sequence(:zip) { |n| "MyString#{n}" }
+    sequence(:country) { |n| "MyString#{n}" }
     settings { "" }
   end
 end

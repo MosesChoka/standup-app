@@ -1,35 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe "Accounts", type: :request do
-  #login_user
-  before(:each) do
-    user = User.create!(
-      name: "John",
-      email: "specuser@test.com",
-      password: "spec123"
-    )
-
-    sign_in user
-  end
+  login_user
 
   # spec for the new action
   describe "GET #new" do
-
-      it "returns http success" do
-        get '/accounts/new'
-        expect(response).to have_http_status(:success)
-      end
     
-      it "renders new template" do
-        get '/accounts/new'
-        expect(response).to render_template :new
-      end
+    it 'returns http success' do
+      get '/accounts/new'
+      expect(response).to have_http_status(:success)
+    end
+    it 'renders new template' do
+      get '/accounts/new'
+      expect(response).to render_template :new
+    end
   end
 
   # spec for the create action
   describe "POST #create" do
 
     it "creates an account" do
+      
       post '/accounts', params: { account: FactoryBot.attributes_for(:account)}
       expect(response).to redirect_to root_path
     end
