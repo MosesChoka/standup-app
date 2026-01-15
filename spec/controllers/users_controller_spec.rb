@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# tests the response, template rendered, or redirect followed on all of the actions in UsersController
 RSpec.describe "Users", type: :request do
   login_user
 

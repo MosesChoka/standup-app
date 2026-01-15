@@ -1,4 +1,8 @@
-class ApplicationController < ActionController::Base    
+class ApplicationController < ActionController::Base
+    rescue_from CanCan::AccessDenied do |exception|
+        redirect_to root_url,  alert: "You are not authorized to access thi page"   
+    end
+    
     protect_from_forgery with: :exception
     before_action :authenticate_user!
     layout :layout_by_resource

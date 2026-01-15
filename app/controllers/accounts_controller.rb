@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
-    #load_and_authorize_resource adds CanCanCan command to this controller
+
+    load_and_authorize_resource #adds CanCanCan command to this controller
     # the new action  will render the form to capture the new accounts name
     def new
         redirect_to root_path unless current_user.account.nil? # redirect to root_path if there's already an account
@@ -13,6 +14,7 @@ class AccountsController < ApplicationController
 
         if @account.save
             current_user.account = @account
+            current_user.add_role :admin, @account
             current_user.save
             redirect_to root_path, success: "Your account has been created!"
         else

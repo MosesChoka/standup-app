@@ -72,7 +72,7 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "GET /new" do
-    login_user
+    login_admin
 
     it "returns http success" do
       get '/account/users/new'
@@ -131,8 +131,8 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "GET /edit" do
+    
     login_admin
-
     user = FactoryBot.create(:user)
 
     it "returns http success" do
@@ -147,8 +147,8 @@ RSpec.describe "Users",  type: :request do
   end
 
   describe "PUT #update" do
+    
     login_admin
-
     user = FactoryBot.create(:user)
 
     it "returns http success" do

@@ -23,7 +23,7 @@ require 'support/system_macros'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f } # uncommented so we don't have to add 'require' line at the top
 
 #Rails.root.glob('spec/support/**/*.rb').sort.each { |f| require f }
 

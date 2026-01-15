@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe "SignUpProcesses", type: :system do
   before do
-  driven_by(:rack_test)
+    driven_by(:rack_test)
   end
   it "should require the user to sign up and successfully sign up" do
     visit root_path
