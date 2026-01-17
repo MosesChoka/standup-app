@@ -21,6 +21,7 @@ RSpec.describe 'Edit User', type: :system do
       it "and edit the user successfully" do
         visit account_users_path
         first('tbody tr').click_on("Edit")
+        
         within "#edit_user" do
           fill_in "user_email", with: 'test@test.com'
         end
