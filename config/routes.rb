@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   resource :accounts
 
+  get 'dates/:date', to: "dates#update", as: 'update_date'
   get 'user/me', to: 'users#me', as: 'my_settings'
   patch 'user/update_me', to: 'users#update_me', as: 'update_my_settings'
   get 'user/password', to: 'users#password', as: 'my_password'

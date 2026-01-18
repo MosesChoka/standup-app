@@ -6,10 +6,16 @@ class ApplicationController < ActionController::Base
 
 
     helper_method :current_account
+    helper_method :current_date
 
     def current_account
       @current_account ||= current_user.account
       @current_account
+    end
+
+    def current_date
+      session[:current_date] = session[:current_date] || Date.today.iso8601
+      @current_date ||= session[:current_date]
     end
 
     protected
