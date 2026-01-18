@@ -1,4 +1,40 @@
-<div class="mt-10 sm:mt-20">
-  <h1 class="font-bold text-4xl">Activity#mine</h1>
-  <p>Find me in app/views/activity/mine.html.erb</p>
+<div class="flex p-5" aria-label="Breadcrumb">
+  <ol class="inline-flex items-center space-x-1 md:space-x-3">
+    <li class="inline-flex items-center">
+      <h2 href="#" class="inline-flex items-center font-medium text-gray-700 hover:text-gray-900">
+        My Activity
+      </h2>
+    </li>
+  </ol>
+</div>
+<div class="flex flex-row m-auto p-5">
+  <div class="basis-1/4">
+    <div class="w-6 ml-auto">
+      <%= link_to update_date_path(date: Date.parse(current_date) - 1.day), id: 'date-backwards', class:'' do %>
+        <%= heroicon "arrow-left", class: 'inline'%>
+      <% end %>
+    </div>
+  </div>
+  <div class="basis-1/2">
+    <div class="text-center" data-controller="flatpickr" data-flatpickr-wrap="true">
+      <input id="datePickerInput" type="text" name="current_date" value="<%= current_date %>" style="visibility:hidden;height:.5px;" data-input/>
+      <div data-toggle class="inline cursor-pointer">
+        <%= heroicon "calendar", class: 'inline' %>
+        <h3 class="ml-3 inline">
+          <%= Date.parse(current_date).strftime("%a, %b #{Date.parse(current_date).day.ordinalize}") %>
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="basis-1/4">
+    <div class="w-6 mr-auto text-right">
+      <%= link_to update_date_path(date: Date.parse(current_date) + 1.day), id: 'date-forwards' do %>
+        <div class="card">
+          <div class="text-left">
+            <%= heroicon "arrow-right", class: 'inline'%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
