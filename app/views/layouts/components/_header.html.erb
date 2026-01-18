@@ -47,7 +47,7 @@
                 <a href="#" data-action="dropdown#toggle" class="p-2 hover:bg-gray-800 text-white text-sm no-underline block"><i class="fa fa-cog fa-fw"></i>Settings</a>
               </div>
               <div class="border border-gray-800">
-                <a href="#"data-action="dropdown#toggle" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out </a>
+                <%= button_to 'Log Out', destroy_user_session_path, method: :delete,  data: { turbo_method: :delete, action: "dropdown#toggle" }, class: "p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block cursor-pointer"%>
               </div>
             </div>
           </li>

@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :error => exception.message
+  end
+  add_flash_types :error
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_users, only: [:index]
-  #load_and_authorize_resource # adds CanCanCan command
+  load_and_authorize_resource # adds CanCanCan command
 
 
   def index
