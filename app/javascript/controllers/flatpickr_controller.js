@@ -6,7 +6,7 @@ export default class extends Flatpickr {
     }
 
     change(selectedDates, _dateStr, _instance) {
-        window.Turbo.visit(`/dates/${selectedDates[0].toISOString().substring(0,10)}`)
+        window.Turbo.visit(`/dates/${ _dateStr }`)
     }
 }
 
