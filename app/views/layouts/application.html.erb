@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" %>
     <%= javascript_importmap_tags %>
   </head>
   <body class="bg-gray-800 font-sans leading-normal tracking-normal mt-12">
@@ -17,7 +18,7 @@
         <div class="mt-10 flex items-center justify-center">
           <%= flash_messages %>
         </div>
-        <div class="flex flex-wrap p-3">
+        <div>
           <%= yield %>
         </div>
         <%= render partial: 'layouts/components/footer' %>

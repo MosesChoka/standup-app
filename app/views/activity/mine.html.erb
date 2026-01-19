@@ -7,10 +7,10 @@
     </li>
   </ol>
 </div>
-<div class="flex flex-row m-auto p-5">
+<div class="flex m-auto p-5">
   <div class="basis-1/4">
     <div class="w-6 ml-auto">
-      <%= link_to update_date_path(date: Date.parse(current_date) - 1.day), id: 'date-backwards', class:'' do %>
+      <%= link_to update_date_path(date: Date.parse(current_date) - 1.day), id: 'date-backwards' do %>
         <%= heroicon "arrow-left", class: 'inline'%>
       <% end %>
     </div>

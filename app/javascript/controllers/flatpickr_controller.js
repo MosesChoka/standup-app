@@ -1,8 +1,6 @@
-import { Controller } from "@hotwired/stimulus"
-
 import Flatpickr from "stimulus-flatpickr"
 
-export default class extends Controller {
+export default class extends Flatpickr {
     connect() {
         super.connect()
     }
@@ -11,3 +9,4 @@ export default class extends Controller {
         window.Turbo.visit(`/dates/${selectedDates[0].toISOString().substring(0,10)}`)
     }
 }
+
