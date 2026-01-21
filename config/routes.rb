@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :standups
   devise_for :users, controllers: { registrations: "registrations" }
   resource :accounts
+  resources :teams, path: 't'
 
   get 'dates/:date', to: "dates#update", as: 'update_date'
   get 'user/me', to: 'users#me', as: 'my_settings'

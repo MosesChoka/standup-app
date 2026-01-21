@@ -13,6 +13,7 @@ class Ability
     if user.has_role?( :admin, current_account )
       can :manage, User
       can :manage, Account
+      can :manage, :all
     elsif user.has_role?( :user, current_account ) 
       can [:me, :password, :update_me, :update_password], User
       can [:feed, :mine], :activity

@@ -1,0 +1,92 @@
+<%= form_with model: @team, local: true do |form| %>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+      <ul>
+        <% @team.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :name, class: 'block mb-2 text-sm font-medium text-gray-900' %>
+    <%= form.text_field :name, placeholder: 'Enter a Team name', class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
+  </div>
+  <div class="field">
+    <%= form.label :description, class: 'block mb-2 text-sm font-medium text-gray-900' %>
+    <%= form.text_area :description, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
+  </div>
+  <div class="field">
+    <%= form.label :timezone, class: 'block mb-2 text-sm font-medium text-gray-900' %>
+    <%= form.time_zone_select :timezone, ActiveSupport::TimeZone.all, {}, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
+  </div>
+  <div class="field">
+    <%= form.label :days_of_the_week, "Days of the week", class:'block mb-2 text-sm font-medium text-gray-900'%>
+    <% DaysOfTheWeekMembership.days.each do |day_name, i| %>
+      <div class="inline">
+        <%= check_box_tag "team[days][]", day_name, form.object.days.include?(day_name), {id: "team_days_#{day_name.downcase}", class:'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'} %>
+        <%= form.label "days_#{day_name.downcase}", day_name.capitalize, {style: "padding-left: 0px"} %>
+      </div>
+    <% end %>
+    <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">
+      The days of the week to hold status reports.
+    </p>
+  </div>
+  <div class="py-4">
+    <div class="w-full border-t border-gray-300"></div>
+  </div>
+  <div class="field">
+    <%= form.label " ", "Users", class: 'block mb-2 text-sm font-medium text-gray-900' %>
+    <% @account_users.each do |user| %>
+      <div class="inline">
+        <%= check_box_tag "team[user_ids][]", user.id, form.object.users.pluck(:id).include?(user.id), {id: "team_user_#{user.id}", class:'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'} %>
+        <%= form.label "user_#{user.id}", user.email, {style: "padding-left: 0px"} %>
+      </div>
+    <% end %>
+    <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">
+      Select users to be members of this team.
+    </p>
+  </div>
+  <div class="py-4">
+    <div class="w-full border-t border-gray-300"></div>
+  </div>
+  <h6 class="text-center">Notification Settings </h6>
+  <div data-controller="visibility">
+    <div>
+      <%= label_tag '', "Send Reminder Notification?", class: 'block mb-2 text-sm font-medium text-gray-900' %>
+      <div class="">
+        <%= form.check_box :has_reminder, data: {action: "visibility#toggleTargets"}, class:'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
+        <%= label_tag 'team_has_reminder', "&nbsp".html_safe, class: 'inline' %>
+      </div>
+      <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">
+        Send a reminder notification on days the team has reports.
+      </p>
+    </div>
+    <div class="pt-4" data-visibility-target="hideable" id="reminder-time-box" hidden="<%= form.object.has_reminder ? '' : 'hidden' %>">
+      <%= form.label :reminder_time, class: 'block mb-2 text-sm font-medium text-gray-900' %>
+      <%= form.time_select :reminder_time, {ampm: true, minute_step: 15}, {style: '  display: inline;width: 10%;', class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'} %>
+      <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">The time to send the reminder notification in the selected time zone.</p>
+    </div>
+  </div>
+  <div data-controller="visibility">
+    <div>
+      <%= label_tag '', "Send Recap Notification?", class: 'block mb-2 text-sm font-medium text-gray-900' %>
+      <div class="">
+        <%= form.check_box :has_recap, data: {action: "visibility#toggleTargets"}, class:'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
+        <%= label_tag 'team_has_recap', "&nbsp".html_safe, class: 'inline' %>
+      </div>
+      <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">
+        Send a recap notification on days the team has reports.
+      </p>
+    </div>
+    <div class="pt-4" data-visibility-target="hideable" id="recap-time-box" hidden="<%= form.object.has_recap ? '' : 'hidden' %>">
+      <%= form.label :recap_time, class: 'block mb-2 text-sm font-medium text-gray-900' %>
+      <%= form.time_select :recap_time, {ampm: true, minute_step: 15}, {style: '  display: inline;width: 10%;', class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'} %>
+      <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500">Send a recap notification in the selected time zone.</p>
+    </div>
+  </div>
+  <div class="actions">
+    <%= form.submit "Save", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" %>
+  </div>
+<% end %>

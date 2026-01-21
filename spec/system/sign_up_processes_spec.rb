@@ -5,6 +5,7 @@ RSpec.describe "SignUpProcesses", type: :system do
   end
   it "should require the user to sign up and successfully sign up" do
     visit root_path
+    
     click_on 'Sign up'
 
     within "#new_user" do

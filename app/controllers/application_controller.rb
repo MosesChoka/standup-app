@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
     helper_method :current_account
     helper_method :current_date
+    helper_method :visible_teams
 
     def current_account
       @current_account ||= current_user.account
@@ -16,6 +17,16 @@ class ApplicationController < ActionController::Base
     def current_date
       session[:current_date] = session[:current_date] || Date.today.iso8601
       @current_date ||= session[:current_date]
+    end
+
+    def visible_teams
+      @visible_teams ||=
+        if current_user.has_role? :admin, current_account
+          current_account.teams.includes(:users)
+        else
+          current_user.teams.includes(:users)
+        end
+      @visible_teams
     end
 
     protected
