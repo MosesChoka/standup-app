@@ -72,7 +72,7 @@ class TeamsController < ApplicationController
   end
 
   def days
-    params[:team][:days].map do |day|
+    params[:team][:days]&.map do |day|
       DaysOfTheWeekMembership.new(
         team_id: @team.id,
         day: day
