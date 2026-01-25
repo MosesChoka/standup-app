@@ -12,8 +12,12 @@ class User < ApplicationRecord
   has_many :teams, through: :team_memberships
 
   def avatar_url(size = 45)
-    gravatar_id = Digest::MD5.hexdigest(email.downcase)
-    "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}&d=identicon"
+    if email.present?
+      gravatar_id = Digest::MD5.hexdigest(email.downcase)
+      "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}&d=identicon"
+    else
+      "https://secure.gravatar.com/avatar/?s=#{size}&d=mp"
+    end
   end
 
 end
